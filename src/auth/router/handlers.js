@@ -18,17 +18,22 @@ async function handleSignup(req, res, next) {
 
 async function handleSignin(req, res, next) {
   try {
-    const user = {
-      user: req.user,
-      token: req.user.token
+    const { username, password } = req.headers.authorization;
+
+    // Authenticate the user's credentials
+    const user = await users.authenticateBasic(username, password);
+
+    const response = {
+      username: user.username,
+      token: user.token
     };
-    res.status(200).json(user);
-  } catch (e) {
-    console.error(e);
-    next(e);
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(403).send('Invalid login');
   }
 }
-
 async function handleGetUsers(req, res, next) {
   try {
     const userRecords = await users.findAll({});

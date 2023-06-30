@@ -5,6 +5,6 @@ module.exports = (err, req, res, next) => {
   res.statusCode = err.status || 500;
   res.statusMessage = err.statusMessage || 'Server Error';
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(error));
+  res.write(JSON(error));
   res.end();
 };
