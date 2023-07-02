@@ -73,21 +73,21 @@ Setting Up the Application:
 
 
 
-- **post /signup**: signing up. [local host link](https://authbearersolved.onrender.com/signup)
-you can use the rest of it by adding a / and writing the id  while changing the method
+- **post /signup**: signing up. [signin](https://authbearersolved.onrender.com/signup)
+
 
 ### login Resource
 
-- **post /login**: Retrieve a list of clothes records. [local host link](https://authbearersolved.onrender.com/singin)
-you can use the rest of it by adding a / and writing the id   
+- **post /signin**: sign in records. [singup](https://authbearersolved.onrender.com/singin)
+
 ### users tokken Resource
 
-- **get **: Retrieve a list of clothes records. [local host link](https://authbearersolved.onrender.com/users)
-you can use the rest of it by adding a / and writing the id   
+- **get **: Retrieve a list of users records. [users](https://authbearersolved.onrender.com/users)
+ 
 ### secret Resource
 
-- **get /**: Retrieve a list of clothes records. [local host link](https://authbearersolved.onrender.com/secret)
-you can use the rest of it by adding a / and writing the id   
+- **get /**: Retrieve a secret [secret](https://authbearersolved.onrender.com/secret)
+ 
 
 ## Usage Guide
 you can add stuff using the body cause i used body parser regarding the food you shoud write it like that 
