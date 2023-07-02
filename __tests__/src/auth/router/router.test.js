@@ -42,8 +42,8 @@ describe('Auth Router', () => {
     const userObject = response.body;
     expect(response.status).toBe(200);
     expect(userObject.token).toBeDefined();
-    expect(userObject.user.id).toBeDefined();
-    expect(userObject.user.username).toEqual(username);
+    expect(userObject.id).toBeDefined();
+    expect(userObject.username).toEqual(username);
   });
 
   it('Can signin with bearer auth token', async () => {

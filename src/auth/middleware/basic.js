@@ -5,7 +5,7 @@ const { users } = require('../models/index.js'); // Change "user" to "users"
 
 module.exports = async (req, res, next) => {
   if (!req.headers.authorization) {
-    return _authError();
+    return _authError(res);
   }
 
   const basic = req.headers.authorization.split(' ').pop(); 
@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
     const decodedValues = base64.decode(basic);
     const [username, password] = decodedValues.split(':').map(value => value.trim());
     console.log('username and pass', username, password);
-
+    
     try {
       req.users = await users.authenticateBasic(username, password);
       next();
@@ -40,6 +40,6 @@ function base64Decode(str) {
   }
 }
 
-function _authError() {
-  res.status(401).send('Authorization header missing');
+function _authError(res) {
+  res.status(403).send('Invalid login');
 }

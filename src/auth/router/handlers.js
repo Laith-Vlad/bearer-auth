@@ -16,23 +16,24 @@ async function handleSignup(req, res, next) {
   }
 }
 
-async function handleSignin(req, res, next) {
+async function handleSignin( req , res , next ) {
   try {
-    const { username, password } = req.headers.authorization;
-
-    // Authenticate the user's credentials
-    const user = await users.authenticateBasic(username, password);
 
     const response = {
-      username: user.username,
-      token: user.token
+     
+      id: req.users.id,
+      username: req.users.username,
+      password: req.users.password,
+      token: req.users.token
     };
 
     res.status(200).json(response);
-  } catch (error) {
-    console.error(error);
-    res.status(403).send('Invalid login');
-  }
+} catch (error) {
+  console.error(error);
+  const statusCode = 403;
+  next({ status: statusCode, message: 'Invalid login' });
+  res.status(statusCode).send('Invalid login');
+}
 }
 async function handleGetUsers(req, res, next) {
   try {
