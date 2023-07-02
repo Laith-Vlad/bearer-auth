@@ -1,5 +1,4 @@
 'use strict';
-require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -22,25 +21,19 @@ const userSchema = (sequelize, DataTypes) => {
   });
   // Basic AUTH: Validating strings (username, password) 
   model.authenticateBasic = async function (username, password) {
-    console.log(username);
-    console.log(password);
-    const users = await this.findAll({ where: { username }, limit: 1 });
-    const user = users[0]; // Get the first user from the array
-    console.log(username);
-    console.log(password);
-    console.log(user);
-    console.log(user.password);
+    const user = await this.findOne({ where: { username } });
   
     if (user) {
       const valid = await bcrypt.compare(password, user.password);
       if (valid) {
-        return user;
+        return user; // Return the username in a JSON object
+      } else {
+        return { username: user.username || '' }; // Return the username as a string in a JSON object or an empty string
       }
     }
+  
     throw new Error('Invalid User');
   };
-  
-  
   
   // Bearer AUTH: Validating a token
   model.authenticateToken = async function (token) {
@@ -52,7 +45,8 @@ const userSchema = (sequelize, DataTypes) => {
       }
       throw new Error("User Not Found");
     } catch (e) {
-      throw new Error(e.message);
+      throw new Error(e);
+      console.log(e)
     }
   };
 
