@@ -23,7 +23,7 @@ async function handleSignin( req , res , next ) {
      
       id: req.users.id,
       username: req.users.username,
-      password: req.users.password,
+    
       token: req.users.token
     };
 
