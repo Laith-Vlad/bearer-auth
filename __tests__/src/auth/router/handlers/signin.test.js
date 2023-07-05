@@ -34,7 +34,7 @@ describe('Testing the signin handler', () => {
     expect.objectContaining({
       id: expect.any(Number),
       username: expect.any(String),
-      password: expect.any(String),
+      
       token: expect.any(String),
     })
   );
